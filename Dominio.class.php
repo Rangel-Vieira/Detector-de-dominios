@@ -44,7 +44,9 @@ class Dominio {
         $url = $this->removerProtocolo($url);
         $url = $this->removerCaminho($url);
         $url = $this->removerWww($url);
-    
+
+        if($url === '') return '';
+
         $url = explode('.', $url);
         $url = array_reverse($url);
     
@@ -67,13 +69,16 @@ class Dominio {
     }
 
     /**
-     * Remove Http e Https de uma URL;
+     * Remove os protocolos de uma URL;
      * @param string $url
      * @return string Retorna a URL sem o protocolo
      */
     private function removerProtocolo($url){
-        $url = str_replace('https://', '', $url);
-        $url = str_replace('http://', '', $url);
+        $pos = strpos($url, "://");
+
+        if($pos !== false) {
+            $url = substr($url, $pos + 3);
+        }
     
         return $url;
     }
