@@ -44,6 +44,7 @@ class Dominio {
         $url = $this->removerProtocolo($url);
         $url = $this->removerCaminho($url);
         $url = $this->removerWww($url);
+        $url = $this->removerPorta($url);
 
         if($url === '') return '';
 
@@ -105,7 +106,7 @@ class Dominio {
      * Responsável por filtrar a palavra www dos domínios de URLs
      * @param mixed $url
      */
-    function removerWww($url){
+    private function removerWww($url){
         if(strlen($url) < 4) return $url;
     
         $tresPrimeirosCaracteres = substr($url, 0, 4);
@@ -114,6 +115,16 @@ class Dominio {
             $url = substr($url, 4, strlen($url)-1);
         }
     
+        return $url;
+    }
+
+    private function removerPorta($url){
+        $pos = strpos($url, ":");
+
+        if($pos !== false) {
+            $url = substr($url, 0, $pos);
+        }
+
         return $url;
     }
 
@@ -196,4 +207,12 @@ class Dominio {
             unlink('./psl-limpo.txt');
         }
     }
+}
+
+include_once '../IANA/urls.php';
+
+$dominio = new Dominio();
+
+foreach($urls as $url){
+    echo $dominio->getDominio($url) . PHP_EOL;
 }
