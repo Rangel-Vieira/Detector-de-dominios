@@ -26,7 +26,7 @@ class Dominio {
         if($this->baixarPsl()){
             $this->limparPsl();
             $this->preProcessarTlds();
-            $this->limparArquivosTemporários();
+            $this->limparArquivosTemporarios();
         }else{
             echo 'Ocorreu um erro ao baixar o arquivo das PSLs do link: ' . $this->caminhoNuvemPsl;
         }
@@ -182,7 +182,7 @@ class Dominio {
      * Apaga o arquivo de sufixos e o arquivo limpo para poupar armazenamento
      * @return void
      */
-    private function limparArquivosTemporários(){
+    private function limparArquivosTemporarios(){
         if(file_exists('public_suffix_list.dat')){
             unlink('public_suffix_list.dat');
         }
