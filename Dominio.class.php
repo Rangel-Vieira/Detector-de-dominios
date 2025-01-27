@@ -208,11 +208,3 @@ class Dominio {
         }
     }
 }
-
-include_once '../IANA/urls.php';
-
-$dominio = new Dominio();
-
-foreach($urls as $url){
-    echo $dominio->getDominio($url) . PHP_EOL;
-}
